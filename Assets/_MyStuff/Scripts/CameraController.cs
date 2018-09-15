@@ -36,6 +36,7 @@ public class CameraController : MonoBehaviour
 
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref refMoveVelocity, dampValue);
     }
+
     private void FindAveragePosition()
     {
         Vector3 _avgPos = Vector3.zero;
@@ -70,6 +71,7 @@ public class CameraController : MonoBehaviour
 
         camera.orthographicSize = Mathf.SmoothDamp(camera.orthographicSize, requiredSize, ref refZoomSpeed, dampValue);
     }
+
     private float FindRequiredOrthographicSize()
     {
         float _requiredSize = 0f;

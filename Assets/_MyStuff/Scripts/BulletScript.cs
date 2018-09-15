@@ -76,7 +76,7 @@ public class BulletScript : MonoBehaviour
         // in this case set damage to 0
         _damage = (int)Mathf.Max(0, _damage);
 
-        print(_damage);
+        //print(_damage);
         return _damage;
     }
 }
