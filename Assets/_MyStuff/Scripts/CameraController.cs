@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     public float dampValue = 0.2f; // time to move & zoom the camera to desired position (for smoothness in smoothdamp)
     public float minOrthographicSize = 4f; // Max Zoom in Distance
     public float screenEdgeBuffer = 4f; // amount added to the camera size for edge offset
-    public Transform[] targets;
+    [HideInInspector] public Transform[] targets;
 
     private new Camera camera;
     private float refZoomSpeed; // required a ref in smooth damp
