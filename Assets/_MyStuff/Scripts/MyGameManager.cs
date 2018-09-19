@@ -16,8 +16,8 @@ public class MyGameManager : MonoBehaviour
     private int roundNumber;
     private WaitForSeconds startWait;
     private WaitForSeconds endWait;
-    private TankManager roundWinner;
-    private TankManager gameWinner;
+    private MyTankManager roundWinner;
+    private MyTankManager gameWinner;
 
     void Start()
     {
@@ -76,10 +76,31 @@ public class MyGameManager : MonoBehaviour
 
     }
 
-    private void DisableTankControls()
+    private IEnumerator RoundPlaying()
     {
-        for (int i = 0; i < tanks.Length; i++)
-            tanks[i].DisableControls();
+        EnableTankControls();
+        while (!OneTankLeft())
+        {
+
+        }
+
+        yield return null;
+    }
+
+    private IEnumerator RoundEnding()
+    {
+        DisableTankControls();
+
+        roundWinner = null;
+        roundWinner = GetRoundWinner();
+        if (roundWinner != null)
+        {
+            roundWinner.wins++;
+        }
+        gameWinner = GetGameWinner();
+        Debug.Log("Wins the Game");
+
+        yield return endWait; ;
     }
 
     private void ReserAllTanks()
@@ -88,13 +109,46 @@ public class MyGameManager : MonoBehaviour
             tanks[i].Reset();
     }
 
-    private IEnumerator RoundPlaying()
+    private bool OneTankLeft()
     {
-        yield return null;
+        int numTanksLeft = 0;
+        for (int i = 0; i < tanks.Length; i++)
+        {
+            if (tanks[i].instance.activeSelf)
+                numTanksLeft++;
+        }
+        return numTanksLeft <= 1;
     }
 
-    private IEnumerator RoundEnding()
+    private void EnableTankControls()
     {
-        yield return endWait;
+        for (int i = 0; i < tanks.Length; i++)
+            tanks[i].DisableControls();
+    }
+
+    private void DisableTankControls()
+    {
+        for (int i = 0; i < tanks.Length; i++)
+            tanks[i].DisableControls();
+    }
+
+    private MyTankManager GetGameWinner()
+    {
+        for (int i = 0; i < tanks.Length; i++)
+        {
+            if (tanks[i].wins == numberOfRounds)
+                return tanks[i];
+        }
+        return null;
+    }
+
+    private MyTankManager GetRoundWinner()
+    {
+        for (int i = 0; i < tanks.Length; i++)
+        {
+            if (tanks[i].instance.activeSelf)
+                return tanks[i];
+        }
+        return null;
     }
 }
