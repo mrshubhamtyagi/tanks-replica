@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MyGameManager : MonoBehaviour
 {
-    public int numberOfRounds = 3;
+    public int numberOfRoundsToWin = 3;
     public float startDelay = 2f;
     public float endDelay = 2f;
     public CameraController cameraControlScript;
@@ -27,7 +27,7 @@ public class MyGameManager : MonoBehaviour
         SpawnTanks();
         SetCameraTargets();
 
-        StartCoroutine(GameLoop());
+        //StartCoroutine(GameLoop());
     }
 
     private void SpawnTanks()
@@ -81,10 +81,8 @@ public class MyGameManager : MonoBehaviour
         EnableTankControls();
         while (!OneTankLeft())
         {
-
+            yield return null;
         }
-
-        yield return null;
     }
 
     private IEnumerator RoundEnding()
@@ -103,11 +101,6 @@ public class MyGameManager : MonoBehaviour
         yield return endWait; ;
     }
 
-    private void ReserAllTanks()
-    {
-        for (int i = 0; i < tanks.Length; i++)
-            tanks[i].Reset();
-    }
 
     private bool OneTankLeft()
     {
@@ -118,6 +111,12 @@ public class MyGameManager : MonoBehaviour
                 numTanksLeft++;
         }
         return numTanksLeft <= 1;
+    }
+
+    private void ReserAllTanks()
+    {
+        for (int i = 0; i < tanks.Length; i++)
+            tanks[i].Reset();
     }
 
     private void EnableTankControls()
@@ -136,7 +135,7 @@ public class MyGameManager : MonoBehaviour
     {
         for (int i = 0; i < tanks.Length; i++)
         {
-            if (tanks[i].wins == numberOfRounds)
+            if (tanks[i].wins == numberOfRoundsToWin)
                 return tanks[i];
         }
         return null;

@@ -91,8 +91,6 @@ public class ShootingScript : MonoBehaviour
         shootingAudio.clip = fireClip;
         shootingAudio.Play();
 
-        print(currentLaunchForce);
-
         Rigidbody bullet = Instantiate(bulletRB, fireTransform.position, fireTransform.rotation) as Rigidbody;
         bullet.velocity = fireTransform.forward * currentLaunchForce;
 

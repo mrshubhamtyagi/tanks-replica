@@ -230,8 +230,14 @@ MonoBehaviour:
   tanks:
   - tankColor: {r: 0.5330188, g: 1, b: 0.6163379, a: 1}
     spawnPosition: {fileID: 1079492364}
+    playerNumber: 0
+    instance: {fileID: 0}
+    wins: 0
   - tankColor: {r: 0.43867922, g: 0.84197223, b: 1, a: 1}
     spawnPosition: {fileID: 985533381}
+    playerNumber: 0
+    instance: {fileID: 0}
+    wins: 0
 --- !u!1 &985533380
 GameObject:
   m_ObjectHideFlags: 0
