@@ -123,7 +123,7 @@ public class MyGameManager : MonoBehaviour
     private void EnableTankControls()
     {
         for (int i = 0; i < tanks.Length; i++)
-            tanks[i].DisableControls();
+            tanks[i].EnableControls();
     }
 
     private void DisableTankControls()
